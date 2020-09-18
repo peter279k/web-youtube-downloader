@@ -69,9 +69,9 @@
                     for (index in data) {
                         tbodyVideoLists += '<tr>';
                         tbodyVideoLists += '<th scope="row">' + dataIndex + '</th>';
-                        tbodyVideoLists += '<td>' + data[index]['format'] + '</td>';
-                        tbodyVideoLists += '<td>' + data[index]['itag'] + '</td>';
-                        tbodyVideoLists += '<td><a href="' + data[index][url]  + '" download>下載</a></td>';
+                        tbodyVideoLists += '<td>' + data['links'][index]['format'] + '</td>';
+                        tbodyVideoLists += '<td>' + data['links'][index]['itag'] + '</td>';
+                        tbodyVideoLists += '<td><a href="' + data['links'][index][url]  + '" download>下載</a></td>';
                         tbodyVideoLists += '</tr>';
                         dataIndex += 1;
                     }
