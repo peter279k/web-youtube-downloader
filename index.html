@@ -51,7 +51,7 @@
 
                     if (error) {
                         alert('錯誤訊息: ' + error);
-                        return;
+                        return false;
                     }
 
                     // first link with video
@@ -61,16 +61,23 @@
 
                     if (typeof first === 'undefined') {
                         alert('沒有找到任何的影片連結!');
-                        return;
+                        return false;
                     }
 
-                    let stream_url = 'stream.php?url=' + encodeURIComponent(first['url']);
+                    let tbodyVideoLists = '';
+                    let dataIndex = 1;
+                    for (index in data) {
+                        tbodyVideoLists += '<tr>';
+                        tbodyVideoLists += '<th scope="row">' + dataIndex + '</th>';
+                        tbodyVideoLists += '<td>' + data[index]['format'] + '</td>';
+                        tbodyVideoLists += '<td>' + data[index]['itag'] + '</td>';
+                        tbodyVideoLists += '<td><a href="' + data[index][url]  + '" download>下載</a></td>';
+                        tbodyVideoLists += '</tr>';
+                        dataIndex += 1;
+                    }
 
-                    let video = $("video");
-                    video.attr('src', stream_url);
-                    video[0].load();
+                    $('#video-lists').html(tbodyVideoLists);
                 });
-
             });
 
         });
@@ -106,31 +113,12 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
+                <th scope="col">影片格式</th>
+                <th scope="col">itag</th>
+                <th scope="col">影片網址</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-              </tr>
-            </tbody>
+            <tbody id="video-lists"></tbody>
           </table>
           </div>
         </div>
