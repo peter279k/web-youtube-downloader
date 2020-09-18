@@ -28,4 +28,4 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         PORT: ${{ secrets.PORT }}
         KEY: ${{ secrets.SSHKEY }}
-        script: cd /var/www/youtube.peterli.website/html/js/ && cp config.js.sample config.js && sed -i -e "s/your.leaflet.token/$(cat $HOME/leaflet_token.txt)/g" config.js && cp $HOME/datathon2020.csv /var/www/youtube.peterli.website/html/
+        script: ./build.sh
