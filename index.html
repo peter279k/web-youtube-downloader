@@ -67,6 +67,10 @@
                     let tbodyVideoLists = '';
                     let dataIndex = 1;
                     for (index in links) {
+                        if (links[index]['format'].indexOf('video') === -1 || links[index]['format'].indexOf('audio') === -1) {
+                            continue;
+                        }
+
                         tbodyVideoLists += '<tr>';
                         tbodyVideoLists += '<th scope="row">' + dataIndex + '</th>';
                         tbodyVideoLists += '<td>' + links[index]['format'] + '</td>';
