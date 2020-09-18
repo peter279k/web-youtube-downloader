@@ -66,12 +66,13 @@
 
                     let tbodyVideoLists = '';
                     let dataIndex = 1;
-                    for (index in data) {
+                    let links = data['links'];
+                    for (index in links) {
                         tbodyVideoLists += '<tr>';
                         tbodyVideoLists += '<th scope="row">' + dataIndex + '</th>';
-                        tbodyVideoLists += '<td>' + data['links'][index]['format'] + '</td>';
-                        tbodyVideoLists += '<td>' + data['links'][index]['itag'] + '</td>';
-                        tbodyVideoLists += '<td><a href="' + data['links'][index][url]  + '" download>下載</a></td>';
+                        tbodyVideoLists += '<td>' + links[index]['format'] + '</td>';
+                        tbodyVideoLists += '<td>' + links[index]['itag'] + '</td>';
+                        tbodyVideoLists += '<td><a href="' + links[index]['url']  + '" download>下載</a></td>';
                         tbodyVideoLists += '</tr>';
                         dataIndex += 1;
                     }
