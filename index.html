@@ -39,9 +39,12 @@
                 e.preventDefault = false;
                 let url = $("#txt_url").val();
                 let oThis = $(this);
+                oThis.attr('disabled', true);
 
                 $.get('video_info.php', {url: url}, function (data) {
                     console.log(data);
+
+                    oThis.attr('disabled', false);
 
                     let links = data['links'];
                     let error = data['error'];
