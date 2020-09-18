@@ -1,0 +1,31 @@
+name: Deploy
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Copy repository contents via scp to DigitalOcean site
+      uses: appleboy/scp-action@master
+      env:
+        HOST: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+      with:
+        source: "."
+        target: "/var/www/youtube.peterli.website/html"
+
+    - name: Executing remote command to create the Leaflet map token and copy sample data sets
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+        script: cd /var/www/youtube.peterli.website/html/js/ && cp config.js.sample config.js && sed -i -e "s/your.leaflet.token/$(cat $HOME/leaflet_token.txt)/g" config.js && cp $HOME/datathon2020.csv /var/www/youtube.peterli.website/html/

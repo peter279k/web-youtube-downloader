@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web-based YouTube Downloader websites</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <style>
+        .container {
+            width: auto;
+            max-width: 680px;
+            padding: 0 15px;
+        }
+
+        .footer {
+            background-color: #f5f5f5;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+    <script>
+        $(function () {
+            $("#btn_fetch").click(function (e) {
+                e.preventDefault = false;
+                let url = $("#txt_url").val();
+                let oThis = $(this);
+
+                $.get('video_info.php', {url: url}, function (data) {
+                    console.log(data);
+
+                    let links = data['links'];
+                    let error = data['error'];
+
+                    if (error) {
+                        alert('錯誤訊息: ' + error);
+                        return;
+                    }
+
+                    // first link with video
+                    let first = links.find(function (link) {
+                        return link['format'].indexOf('video') !== -1;
+                    });
+
+                    if (typeof first === 'undefined') {
+                        alert('沒有找到任何的影片連結!');
+                        return;
+                    }
+
+                    let stream_url = 'stream.php?url=' + encodeURIComponent(first['url']);
+
+                    let video = $("video");
+                    video.attr('src', stream_url);
+                    video[0].load();
+                });
+
+            });
+
+        });
+    </script>
+</head>
+<body>
+    <main role="main" class="flex-shrink-0">
+        <div class="container">
+          <h1 class="mt-5">Web YouTube Downloader</h1>
+          <div class="row justify-content-left">
+            <div class="col-12 col-md-12 col-lg-12">
+                <form class="card card-sm">
+                    <div class="card-body row no-gutters align-items-center">
+                        <div class="col-auto">
+                            <i class="fas fa-search h4 text-body"></i>
+                        </div>
+                        <!--end of col-->
+                        <div class="col">
+                            <input id="btn_fetch" class="form-control form-control-lg" type="text" placeholder="請貼上YouTube影片網址">
+                        </div>
+                        <!--end of col-->
+                        <div class="col-auto">
+                            <button class="btn btn-lg btn-success" type="submit">查詢</button>
+                        </div>
+                        <!--end of col-->
+                    </div>
+                </form>
+            </div>
+            <!--end of col-->
+            </div>
+           <div class="row justify-content-left">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+              </tr>
+            </tbody>
+          </table>
+          </div>
+        </div>
+    </main>
+</body>
+</html>
