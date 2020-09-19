@@ -2,7 +2,7 @@
 
     $file = $_SERVER['QUERY_STRING'] ?? null;
 
-    if ($file === null || substr($file, 0, 10) !== 'video_url=') {
+    if ($file === null || substr($file, 0, 18) !== 'video_url=https://') {
         die('Cannot find the video_url URL parameter');
     }
 
