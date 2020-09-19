@@ -1,10 +1,12 @@
 <?php
 
-    $file = filter_input(INPUT_GET, 'video_url');
+    $file = $_SERVER['QUERY_STRING'] ?? null;
 
     if ($file === null) {
         die('Cannot find the video_url URL parameter');
     }
+
+    $file = substr($file, 9);
 
     $headers = array_change_key_case(get_headers($file, true));
 
