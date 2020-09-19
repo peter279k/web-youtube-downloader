@@ -2,6 +2,8 @@
 
     $file = filter_input(INPUT_GET, 'video_url');
 
+    echo $file;
+
     if ($file === null) {
         die('Cannot find the video_url URL parameter');
     }
