@@ -6,7 +6,7 @@
         die('Cannot find the video_url URL parameter');
     }
 
-    $file = substr($file, 9);
+    $file = substr($file, 10);
 
     $headers = array_change_key_case(get_headers($file, true));
 
