@@ -15,3 +15,4 @@ cd ./youtube-downloader/
 php ../composer.phar install -n --no-dev
 
 cp ../index.html ./public/
+cp ../download.php ./public/
