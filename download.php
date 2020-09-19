@@ -15,7 +15,6 @@
     }
 
     if (strpos('404 Not Found', $headers[0]) === false) {
-        ob_start();
         header('Content-Description: File Transfer');
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename=videoplayback.mp4');
