@@ -12,6 +12,8 @@ curl -sS https://getcomposer.org/installer | php
 
 cd ./youtube-downloader/
 
+rm -rf ./.git
+
 php ../composer.phar install -n --no-dev
 
 cp ../index.html ./public/
