@@ -68,15 +68,11 @@
                     let dataIndex = 1;
                     let downloadLink = '';
                     for (index in links) {
-                        if (links[index]['format'].indexOf('video') === -1 || links[index]['format'].indexOf('audio') === -1) {
-                            continue;
-                        }
-
                         downloadLink = './download.php?video_url=' + links[index]['url'];
 
                         tbodyVideoLists += '<tr>';
                         tbodyVideoLists += '<th scope="row">' + dataIndex + '</th>';
-                        tbodyVideoLists += '<td>' + links[index]['format'] + '</td>';
+                        tbodyVideoLists += '<td>' + links[index]['mimeType'].split(';')[0].split('/')[1] + '</td>';
                         tbodyVideoLists += '<td>' + links[index]['itag'] + '</td>';
                         tbodyVideoLists += '<td><a href="' + downloadLink  + '">下載</a></td>';
                         tbodyVideoLists += '</tr>';
