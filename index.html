@@ -56,7 +56,7 @@
 
                     // first link with video
                     let first = links.find(function (link) {
-                        return link['format'].indexOf('video') !== -1;
+                        return link['audioQuality'] !== null && link['mimeType'].indexOf('mp4') !== -1;
                     });
 
                     if (typeof first === 'undefined') {
