@@ -68,7 +68,7 @@
                     let dataIndex = 1;
                     let downloadLink = '';
                     for (index in links) {
-                        if (links[index]['mimeType'].indexOf('webm') !== -1 || links[index]['audioQuality'] === null) {
+                        if (links[index]['mimeType'].indexOf('webm') !== -1 || links[index]['mimeType'].indexOf('audio') !== -1 || links[index]['audioQuality'] === null) {
                             continue;
                         }
 
