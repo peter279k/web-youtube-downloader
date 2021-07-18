@@ -24,7 +24,7 @@ try {
 
     if ($links) {
         send_json([
-            'links' => $links->getAllFormats(),
+            'links' => $links->getCombinedFormats(),
         ]);
     } else {
         send_json(['error' => 'No links found']);
