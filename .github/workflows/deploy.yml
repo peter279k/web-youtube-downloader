@@ -1,6 +1,9 @@
 name: Deploy
 
-on: [push]
+on:
+  schedule:
+    - cron: '40 * * * *'
+  workflow_dispatch:
 
 jobs:
   build:
