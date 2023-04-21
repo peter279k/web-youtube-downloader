@@ -13,3 +13,4 @@
 Here are some repositories to accomplish this web-based service!
 
 - [Athlon1600/youtube-downloader](https://github.com/Athlon1600/youtube-downloader)
+- [yt-dlp/yt-dlp](https://github.com/yt-dlp/yt-dlp)
