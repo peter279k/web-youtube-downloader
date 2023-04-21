@@ -41,7 +41,7 @@
                 let oThis = $(this);
                 oThis.attr('disabled', true);
 
-                $.get('video_info.php', {url: url}, function (data) {
+                $.get('https://yt-dlp-api.peterli.website/video/?video_url=' + url, function (data) {
                     console.log(data);
 
                     oThis.attr('disabled', false);
@@ -54,12 +54,7 @@
                         return false;
                     }
 
-                    // first link with video
-                    let first = links.find(function (link) {
-                        return link['audioQuality'] !== null && link['mimeType'].indexOf('mp4') !== -1;
-                    });
-
-                    if (typeof first === 'undefined') {
+                    if (links.length === 0) {
                         alert('沒有找到任何的影片連結!');
                         return false;
                     }
@@ -68,15 +63,11 @@
                     let dataIndex = 1;
                     let downloadLink = '';
                     for (index in links) {
-                        if (links[index]['mimeType'].indexOf('webm') !== -1 || links[index]['mimeType'].indexOf('audio') !== -1 || links[index]['audioQuality'] === null) {
-                            continue;
-                        }
-
                         downloadLink = './download.php?video_url=' + links[index]['url'];
 
                         tbodyVideoLists += '<tr>';
                         tbodyVideoLists += '<th scope="row">' + dataIndex + '</th>';
-                        tbodyVideoLists += '<td>' + links[index]['mimeType'].split(';')[0].split('/')[1] + '</td>';
+                        tbodyVideoLists += '<td>' + links[index]['format'] + '</td>';
                         tbodyVideoLists += '<td>' + links[index]['itag'] + '</td>';
                         tbodyVideoLists += '<td><a href="' + downloadLink  + '">下載</a></td>';
                         tbodyVideoLists += '</tr>';
